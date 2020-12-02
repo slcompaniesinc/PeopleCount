@@ -1,37 +1,30 @@
-<?php
+<?
+class Utility{
+	private $mysqli;
+  function __construct(){
+  	$this->mysqli = new mysqli("localhost", "finalpeo_wp763", "Sp)s7o5J1.", "finalpeo_wp763");
+  }
 
-//utility functions created for security and abstraction
-
-function connectSQL($mysqli, $sql_statement){
-	// can you hash these parameters?
-	
-	 /* check connection */
-	if ($mysqli->connect_errno) {
-	    printf("Connect failed: %s\n", $mysqli->connect_error);
-	    exit();
- 	}
- 	
-
- 	return $mysqli->query($sql_statement); 
-
-}
-
-
-function checkUsername($username, $password){
-	if(isset( $_SESSION["username"]) && isset( $_SESSION["password"])){
-	$username = $_SESSION["username"];
-	$password = $_SESSION["password"];
-	return true;
-}
-else{
-	// cannot access this page directly they must login first.
-	echo '<script type="text/javascript">
-	window.location.href="https://final.peoplecount.work";
-    </script>';
-    return false;
-}
+  function getApplicants($status_name){
+  	$prefix = "wp4s_";
+  	$suffix = "_associates";
+  	$table_name = $prefix . $status_name. $suffix;
+  	$checkuserSql = "SELECT * FROM '$table_name'";
+  	$result = $mysqli->query($checkuserSql);
+  	$usernames = array();
+    $dates = array();
+    while($row = $result->fetch_assoc() ){
+	  $usernames[] = $row["userName"];
+	  $dates[] = $row["dates"];
+    }
+    $array = array();
+    array_push($array, $usernames, $dates);
+    return $array;
+  }
+  
 
 }
 
 
- ?>
+
+?>

@@ -2,22 +2,18 @@
 
 wp_head();
 
-include get_template_directory().'/API/Employer.php';
-include get_template_directory().'/API/Utility.php';
+include_once get_template_directory().'/API/Employer.php';
+include_once get_template_directory().'/API/Utility.php';
 
 // user object which holds all the user info
 $current_user = wp_get_current_user();
+//database connection
+$mysqli = new mysqli( 'localhost', 'finalpeo_wp763' , 'Sp)s7o5J1.' , 'finalpeo_wp763' );
 $username = $current_user->user_login;
 $employer_id = $current_user->id;
 
-
-
-//database connection
-$mysqli = new mysqli("localhost", "finalpeo_wp763", "Sp)s7o5J1.", "finalpeo_wp763");
-$checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_pass='$password'";
-
-
-
+$checkuserSql = 'SELECT * FROM wp4s_applied_associates';
+$result = $mysqli->query($checkuserSql);
 ?>
 
 <!DOCTYPE html>
@@ -28,26 +24,16 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 	<meta charset="utf-8" />
 	<title>People Count</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<link rel="apple-touch-icon" href="/wp-content/themes/dashboard-child/pages/ico/60.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/wp-content/themes/dashboard-child/pages/ico/76.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/wp-content/themes/dashboard-child/pages/ico/120.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/wp-content/themes/dashboard-child/pages/ico/152.png">
+	<link rel="apple-touch-icon" href="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/pages/ico/60.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/pages/ico/76.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/pages/ico/120.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/pages/ico/152.png">
 	
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-touch-fullscreen" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
-	
-	
-	
-	
-	
-
-
-	
-
 </head>
 
 <body class="fixed-header menu-pin menu-behind">
@@ -58,7 +44,7 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 		<div class="sidebar-overlay-slide from-top" id="appMenu"> </div>
 		<!-- END SIDEBAR MENU TOP TRAY CONTENT-->
 		<!-- BEGIN SIDEBAR MENU HEADER-->
-		<div class="sidebar-header"> <img src="/wp-content/themes/dashboard-child/assets/img/logo_white.png" alt="logo" class="brand" data-src="/wp-content/themes/dashboard-child/assets/img/logo_white.png" data-src-retina="/wp-content/themes/dashboard-child/assets/img/logo_white_2x.png" width="78" height="22">
+		<div class="sidebar-header"> <img src="<?php echo get_template_directory_uri().'/assets/img/logo_white.png'?>" alt="logo" class="brand" data-src="<?php echo get_template_directory_uri().'/assets/img/logo_white.png'?>" data-src-retina="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/img/logo_white_2x.png" width="78" height="22">
 			<div class="sidebar-header-controls">
 				<button aria-label="Toggle Drawer" type="button" class="btn btn-icon-link invert sidebar-slide-toggle m-l-20 m-r-10" data-pages-toggle="#appMenu"> <i class="pg-icon">chevron_down</i> </button>
 				<button aria-label="Pin Menu" type="button" class="btn btn-icon-link invert d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar"> <i class="pg-icon"></i> </button>
@@ -68,20 +54,16 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 		<!-- START SIDEBAR MENU -->
 		<div class="sidebar-menu">
 			<!-- BEGIN SIDEBAR MENU ITEMS-->
-			<ul class="menu-items">
-				<li class="m-t-30">
-					<a href="#" class="detailed"> <span class="title">Page 1</span> <span class="details">234 notifications</span> </a> <span class="icon-thumbnail "><i class="pg-icon">inbox</i></span> </li>
-				<li class="">
-					<a href="#"> <span class="title">Page 2</span> </a> <span class="icon-thumbnail "><i class="pg-icon">social</i></span> </li>
-				<li class="">
-					<a href="javascript:;"> <span class="title">Page 3</span> <span class=" arrow"></span> </a> <span class="icon-thumbnail"><i class="pg-icon">brush</i></span>
-					<ul class="sub-menu">
-						<li class=""> <a href="#">Sub Page 1</a> <span class="icon-thumbnail">sp</span> </li>
-						<li class=""> <a href="#">Sub Page 2</a> <span class="icon-thumbnail">sp</span> </li>
-						<li class=""> <a href="#">Sub Page 3</a> <span class="icon-thumbnail">sp</span> </li>
-					</ul>
-				</li>
-			</ul>
+			<? 
+
+			wp_nav_menu(
+				array(
+					'theme_location' => 'site-menu',
+					'menu_class' => 'menu-items'
+				)
+			);
+
+			?>
 			<div class="clearfix"></div>
 		</div>
 		<!-- END SIDEBAR MENU -->
@@ -92,23 +74,164 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 	<div class="page-container">
 		<!-- START PAGE HEADER WRAPPER -->
 		<!-- START MODAL -->
-		<div id="myModal" class="modal" >
+		<div id="myModal" class="modalContainer hideElement" >
 
 				  <!-- Modal content -->
-				  <div class="modal-content">
-				    <span class="close" id="close">×</span>
-				    <p>Some text in the Modal..</p>
-				  </div>
+				  <div class="modal-cont" id="modal-div" >
+				    <span class="closebutton" id="close">×</span>
+				     <div id="content-modal" style="position: relative; ">
 
+				     	<!-- START CLIENT UPLOAD FORM -->
+				     	<div id="upload-container" style="display: none;"> 
+				     		<h1 id="uploads-header"> </h1>
+				     		<ul id="upload-form" class="wrapper">
+				     			<li class="upload-row">
+				     				<label for="client-name">
+				     					Name
+				     				</label>
+				     				<select name="client-name" id="client-name">
+									  <option value="volvo">Volvo</option>
+									</select>
+
+				     			</li>
+
+				     			<li class="upload-row">
+				     				<label for="client-email">
+				     					Email
+				     				</label>
+				     				<select name="client-email" id="client-email">
+									  <option value="volvo">Volvo</option>
+									</select>
+
+				     			</li>
+				     			<li class="upload-row">
+				     				<label for="client-phone">
+				     					Phone
+				     				</label>
+				     				<select name="client-phone" id="client-phone">
+									  <option value="volvo">Volvo</option>
+									</select>
+
+				     			</li>
+				     			<li class="upload-row">
+				     				<label for="client-address">
+				     					Address
+				     				</label>
+				     				<select name="client-address" id="client-address">
+									  <option value="volvo">Volvo</option>
+									</select>
+
+				     			</li>
+				     			<li class="upload-row">
+				     			
+				     			</li>
+
+
+				     		</ul>
+
+
+				     	</div>
+				     	<!-- END CLIENT UPLOAD FORM -->
+								     	<!-- START TABLE -->
+						<div class ="content-container" id="container_table"> 
+						  <h1 class="table-header" id="main-header"></h1>
+
+						 <div class="table-header">
+						 	<table>
+						 		<thead>
+						 			<tr>
+						 				<th id="first-header" class="table-header"></th>
+						 				<th id="name-header" class="table-header">Name</th>
+						 				<th id="date-header" class="table-header"></th>
+						 			</tr>
+						 		</thead>
+						 	</table>
+						 </div>
+						 <div class="table-content spaceholder">
+						 	<table id="applied_table" cellpadding="0" cellspacing="0" border="0">
+						 		<tbody id="t_body">
+						 			<!-- just need to manually make rows and checkboxes -->
+						 		</tbody>
+						 	</table>
+						 </div>
+
+						</div>
+						<!-- END TABLE -->
+
+						<!--START WORKFLOW FORM -->
+						<div id="workflow-container" style="display: none;">
+							<div>
+							<h1 class="table-header moveleft" id="workflow-header">Applicant</h1>
+							<div style="text-align:center;width: 100%;">
+								<!-- New Applicants Approval Form -->
+								<ul class="noBullets" id="workflow-list">
+									<li id="submitter"><span>Submitted by: </span><span></span> </li>
+									<li id="submitdate"><span>Submitted at: </span><span></span> </li>
+									<li id="status"><span>Status: </span><span></span></li>
+									<li id="notes">Note</li>
+									<li><textarea id="workflow-text" style="width: 275px;height: 125px;"></textarea></li>
+								</ul>
+								<div id="workflow-buttons" class="content-container noBullets">
+				     			<button id="approvebutton">
+				     				<span><i class="fas fa-check"></i></span>APPROVE
+				     			</button>
+				     			<button id="denyButton">
+				     				<span><i class="fas fa-window-close"></i></span> DECLINE
+				     			</button>
+				     			
+				     		</div>
+				     		<div id="wrkfl-active-buttons" class="content-container noBullets" style="display: none;">
+				     			<button id="wrkfl-submit-active">
+				     				SUBMIT
+				     			</button>
+				     			<button id="wrkfl-cancel-active">
+				     				CANCEL
+				     			</button>
+				     		</div>
+				     		
+								 <!-- End New Applicants Approval Form -->
+
+
+
+
+								
+				     		
+							</div>
+						</div>
+						</div>
+						
+
+						<!-- END WORKFLOW FORM -->
+				     		
+				    </div>
+				    <div id="content-modaltwo">
+				    	<div id="modal-buttons">
+				     			<button id="selectall">
+				     				SELECT ALL
+				     			</button>
+				     			<button id="editButton">
+				     				EDIT
+				     			</button>
+				     			<button id="delete">
+				     				DELETE
+				     			</button>
+				     		</div>
+
+				     		
+				    </div>
 				</div>
+				  </div>
+				 
 		<!-- END MODAL -->	
+
+		
 		<!-- START HEADER -->
 		<div class="header ">
 			<!-- START MOBILE SIDEBAR TOGGLE --><a href="#" class="btn-link toggle-sidebar d-lg-none pg-icon btn-icon-link" data-toggle="sidebar">
 				menu</a>
 			<!-- END MOBILE SIDEBAR TOGGLE -->
 			<div class="">
-				<div class="brand inline  m-l-10 "> <img src="/wp-content/themes/dashboard-child/images/peoplecount.png" style="width: 120px; height: 50px;"> </div>
+				<div class="brand inline  m-l-10 "> <img src="<?php echo get_template_directory_uri().'/images/peoplecount.png'?>" style="width: 120px; height: 50px;"> </div>
 				<!-- START NOTIFICATION LIST -->
 				<ul class="d-lg-inline-block d-none notification-list no-margin d-lg-inline-block b-grey b-l b-r no-style p-l-20 p-r-20">
 					<li class="p-r-5 inline">
@@ -172,7 +295,7 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 										<!-- START Notification Item-->
 										<div class="notification-item unread clearfix">
 											<div class="heading">
-												<div class="thumbnail-wrapper d24 circular b-white m-r-5 b-a b-white m-t-10 m-r-10"> <img width="30" height="30" data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/1x.jpg" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/1.jpg" alt="" src="/wp-content/themes/dashboard-child/assets/img/profiles/1.jpg"> </div>
+												<div class="thumbnail-wrapper d24 circular b-white m-r-5 b-a b-white m-t-10 m-r-10"> <img width="30" height="30" data-src-retina="<?php echo get_template_directory_uri().'/assets/img/profiles/1x.jpg'?>" data-src="<?php echo get_template_directory_uri().'/assets/img/profiles/1.jpg'?>" alt="" src="<?php echo get_template_directory_uri().'/assets/img/profiles/1.jpg'?>"> </div>
 												<a href="#" class="text-complete pull-left"> <span class="bold">Revox Design Labs</span> <span class="fs-12 m-l-10">Owners</span> </a> <span class="pull-right time">11:00pm</span> </div>
 											<!-- START Notification Item Right Side-->
 											<div class="option" data-toggle="tooltip" data-placement="left" title="mark as read">
@@ -207,8 +330,8 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 				<!-- START User Info-->
 				<div class="dropdown pull-right d-lg-block d-none">
 					<button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="profile dropdown"> <span class="thumbnail-wrapper d32 circular inline">
-							<img src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar.jpg" alt="" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar.jpg"
-								data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small2x.jpg" width="32" height="32">
+							<img src="<?php echo get_template_directory_uri().'/assets/img/profiles/avatar.jpg'?>" alt="" data-src="<?php echo get_template_directory_uri().'/assets/img/profiles/avatar.jpg'?>"
+								data-src-retina="<?php echo get_template_directory_uri().'/assets/img/profiles/avatar_small2x.jpg'?>" width="32" height="32">
 						</span> </button>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu"> <a href="#" class="dropdown-item"><span>Signed in as <br /><b>David Aunsberg</b></span></a>
 						<div class="dropdown-divider"></div> <a href="#" class="dropdown-item">Your Profile</a> <a href="#" class="dropdown-item">Your Activity</a> <a href="#" class="dropdown-item">Your Archive</a>
@@ -250,10 +373,10 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 											<div class="row-xs-height">
 												<div class="col-xs-height col-top">
 													<div class="card-header  top-left top-right">
-														<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Companies</span> </div>
+														<div class="card-title"> <span class="font-montserrat fs-11 all-caps">New Applicants</span> </div>
 														<div class="card-controls">
 															<ul>
-																<li> <button id="companiesButton" class="companiesButton">View</button>
+																<li> <button id="newappsButton" class="companiesButton button-height">View</button>
 																 </li>
 															</ul>
 														</div>
@@ -270,8 +393,8 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 																	<?php 
 																		
 
-																		if($companies = $mysqli->query("SELECT DISTINCT company_name FROM ps_wpjb_company")) {
-																			 $count = $companies->num_rows; 
+																		if($newApps = $mysqli->query("SELECT DISTINCT userName FROM wp4s_applied_associates")) {
+																			 $count = $newApps->num_rows; 
 																			 echo $count;
 																		}
 																		
@@ -301,7 +424,7 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 												<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Job Orders </span> </div>
 												<div class="card-controls">
 													<ul>
-														<li> <button id="jobOrderButton" class="companiesButton" >View</button></li>
+														<li> <button id="jobOrderButton" class="companiesButton button-height" >View</button></li>
 													</ul>
 												</div>
 											</div>
@@ -327,14 +450,20 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 											<div class="card-title text-black hint-text"> <span class="font-montserrat fs-11 all-caps">Inactive Associates </span> </div>
 											<div class="card-controls">
 												<ul>
-													<li><button id="inactiveButton" class="companiesButton" >View</button></li>
+													<li><button id="inactiveButton" class="companiesButton button-height" >View</button></li>
 												</ul>
 											</div>
 										</div>
 										<div class="card-body p-t-40">
 											<div class="row">
 												<div class="col-sm-12">
-													<h4 class="no-margin p-b-5 text-danger semi-bold">50</h4>
+													<h4 class="no-margin p-b-5 text-danger semi-bold">
+													<?php 
+														$checkuserSql = 'SELECT * FROM wp4s_inactive_associates';
+														$result = $mysqli->query($checkuserSql);    
+														echo $result->num_rows;
+													?>
+													</h4>
 													<div class="d-flex align-items-center pull-left small"> <span>WMHC</span> <span class=" text-success"> <i class="pg-icon m-l-10">arrow_up</i> </span> <span class="text-success font-montserrat"> 21% </span> </div>
 													<div class="d-flex align-items-center pull-left m-l-20 small"> <span>HCRS</span> <span class="text-danger"><i class="pg-icon m-l-10">arrow_down</i> </span> <span class="text-danger font-montserrat"> 21% </span> </div>
 													<div class="clearfix"></div>
@@ -364,7 +493,7 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 														<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Active Associates </span> </div>
 														<div class="card-controls">
 															<ul>
-																<li> <button id="activeButton" class="companiesButton" >View</button></li>
+																<li> <button id="activeButton" class="companiesButton button-height" >View</button></li>
 															</ul>
 														</div>
 													</div>
@@ -375,7 +504,13 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 													<div class="row full-height">
 														<div class="col-sm-6">
 															<div class="p-l-20 full-height d-flex flex-column justify-content-between">
-																<h3 class="no-margin p-b-5">300</h3>
+																<h3 class="no-margin p-b-5">
+																	<?php 
+																		$checkuserSql = 'SELECT * FROM wp4s_active_associates';
+																		$result = $mysqli->query($checkuserSql);    
+																		echo $result->num_rows;
+																	?>
+																</h3>
 																<p class="small m-t-5 m-b-20"> <span class="label label-white hint-text font-montserrat m-r-5">60%</span><span class="fs-12">Higher</span> </p>
 															</div>
 														</div>
@@ -399,12 +534,18 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 												<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Placed Associates</span> </div>
 												<div class="card-controls">
 													<ul>
-														<li> <button id="placedButton" class="companiesButton">View</button></li>
+														<li> <button id="placedButton" class="companiesButton button-height">View</button></li>
 													</ul>
 												</div>
 											</div>
 											<div class="p-l-20">
-												<h3 class="no-margin p-b-5">300</h3> <span class="d-flex align-items-center">
+												<h3 class="no-margin p-b-5">
+													<?php 
+														$checkuserSql = 'SELECT * FROM wp4s_placed_associates';
+														$result = $mysqli->query($checkuserSql);    
+														echo $result->num_rows;
+													?>
+												</h3> <span class="d-flex align-items-center">
 							<i class="pg-icon m-r-5">arrow_down</i>
 							<span class="small hint-text">65% lower than last month</span> </span>
 											</div>
@@ -425,14 +566,20 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 											<div class="card-title text-black hint-text"> <span class="font-montserrat fs-11 all-caps">Terminated Associates </span> </div>
 											<div class="card-controls">
 												<ul>
-													<li><button id="terminatedButton" class="companiesButton">View</button> </li>
+													<li><button id="terminatedButton" class="companiesButton button-height">View</button> </li>
 												</ul>
 											</div>
 										</div>
 										<div class="card-body p-t-40">
 											<div class="row">
 												<div class="col-sm-12">
-													<h4 class="no-margin p-b-5 text-danger semi-bold">50</h4>
+													<h4 class="no-margin p-b-5 text-danger semi-bold">
+														<?php 
+															$checkuserSql = 'SELECT * FROM wp4s_terminated_associates';
+															$result = $mysqli->query($checkuserSql);    
+															echo $result->num_rows;
+														?>
+													</h4>
 													<div class="d-flex align-items-center pull-left small"> <span>WMHC</span> <span class=" text-success"> <i class="pg-icon m-l-10">arrow_up</i> </span> <span class="text-success font-montserrat"> 21% </span> </div>
 													<div class="d-flex align-items-center pull-left m-l-20 small"> <span>HCRS</span> <span class="text-danger"><i class="pg-icon m-l-10">arrow_down</i> </span> <span class="text-danger font-montserrat"> 21% </span> </div>
 													<div class="clearfix"></div>
@@ -450,13 +597,8 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 						<div class="col-lg-6 hidden-lg  col-xlg-4 m-b-10" >
 
 							<div class="widget-15 card no-margin  widget-loader-circle" style="height: 400px; overflow-y: auto;">
-								All Applicants
-
 								
-								
-
-								?>
-								<div class="card-header top-right">
+								<div class="card-header top-right ">
 									<div class="card-controls">
 										<ul>
 											<li>
@@ -465,26 +607,25 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 										</ul>
 									</div>
 								</div>
-								<div class="card-body no-padding">
+								<div class="card-body no-padding" style="height:300px;">
+									<table width="600">
+										<h2>No Clients Listed.</h2>
+										<h3>Import Spreadsheet Below</h3>
+										
 
-									<div class="tab-content p-l-10 p-r-10">
-										<div class="tab-pane no-padding active" id="widget-15-tab-1">
-											<div class="full-width">
-												<div class="full-width">
+											<tr>
+												<td width="20%">Select file</td>
+												<td width="80%"><input type="file" name="file" id="file" /></td>
+												</tr>
 
-												</div>
-											</div>
-										</div>
-										<div class="tab-pane no-padding" id="widget-15-tab-2">
-										</div>
-										<div class="tab-pane" id="widget-15-tab-3">
-										</div>
-									</div>
-									<div class="p-t-20 p-l-20 p-r-20 p-b-20">
-										<div class="row">
-											
-										</div>
-									</div>
+												<tr>
+												<td>Submit</td>
+												<td><button id="clients-submit">Submit</button></td>
+											</tr>
+
+										
+									</table>
+									
 								</div>
 							</div>
 
@@ -492,6 +633,8 @@ $checkuserSql = "SELECT * FROM `ps_users` WHERE user_login='$username' AND user_
 						
 					</div>
 					<!-- end first row of widgets-->
+
+
 					<div class="row m-b-10">
 						<!-- Start Search Widget -->
 						<div class="col-sm-5 col-lg-4 col-xlg-3 col-sm-height col-top no-padding card">
@@ -580,15 +723,13 @@ Company
 
 
 						/* Select queries return a resultset */
-						if(isset($_SESSION["employer_id"])){
-							$id = $employer->getEmployerId();
-					}
+						
 						
 						if ($jobs = $mysqli->query("SELECT job_title, job_city, company_name  FROM ps_wpjb_job WHERE `employer_id`='$id' ORDER BY job_title ASC")) {
-							echo "<h1> Job Listings </h1>";
+							echo "<h1 class='table-header'> Job Listings </h1>";
 							echo "<div class='tbl-header'>";
 							echo "<table  cellpadding='0' cellspacing='0' border='0'>";
-							echo "<thead> <tr> <th>Job Title</th> <th>City</th> <th>Company</th></tr> </thead>";
+							echo "<thead><tr> <th class='table-header'>Job Title</th> <th class='table-header'>City</th> <th class='table-header'>Company</th></tr> </thead>";
 							echo "</table></div>";
 							echo "<div class ='tbl-content'><table id='myTable' cellpadding='0' cellspacing='0' border='0'><tbody>";
 							$array = array();
@@ -608,12 +749,8 @@ Company
 								$array[] = $row;
 							
 							}
-							$employer->setJobsPosted($jobs->num_rows);
-							$employer->setlistings($array);
-							// listings is a mulit-dimensional associative array of sql objects
-							$listings = $employer->getlistings();
-							
 
+							// listings is a mulit-dimensional associative array of sql objects
 							echo "</tbody></table></div>";
 						    /* free result set */
 						    $jobs->close();
@@ -645,459 +782,16 @@ Company
 			</div>
 			<!-- END FOOTER -->
 		</div>
+
+		
 		
 	
 		<!-- END PAGE CONTENT WRAPPER -->
 	</div>
 	<!-- END PAGE CONTAINER -->
-	<!--START QUICKVIEW -->
-	<div id="quickview" class="quickview-wrapper" data-pages="quickview">
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
-			<li class=""> <a href="#quickview-notes" data-target="#quickview-notes" data-toggle="tab" role="tab">Notes</a> </li>
-			<li> <a href="#quickview-alerts" data-target="#quickview-alerts" data-toggle="tab" role="tab">Alerts</a> </li>
-			<li class=""> <a class="active" href="#quickview-chat" data-toggle="tab" role="tab">Chat</a> </li>
-		</ul> <a class="btn-icon-link invert quickview-toggle" data-toggle-element="#quickview" data-toggle="quickview"><i class="pg-icon">close</i></a>
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<!-- BEGIN Notes !-->
-			<div class="tab-pane no-padding" id="quickview-notes">
-				<div class="view-port clearfix quickview-notes" id="note-views">
-					<!-- BEGIN Note List !-->
-					<div class="view list" id="quick-note-list">
-						<div class="toolbar clearfix">
-							<ul class="pull-right ">
-								<li> <a href="#" class="delete-note-link"><i class="pg-icon">trash_alt</i></a> </li>
-								<li> <a href="#" class="new-note-link" data-navigate="view" data-view-port="#note-views" data-view-animation="push"><i class="pg-icon">add</i></a> </li>
-							</ul>
-							<button aria-label="" class="btn-remove-notes btn btn-xs btn-block hide"><i class="pg-icon">close</i>Delete</button>
-						</div>
-						<ul>
-							<!-- BEGIN Note Item !-->
-							<li data-noteid="1" class="d-flex justify-space-between">
-								<div class="left">
-									<!-- BEGIN Note Action !-->
-									<div class="form-check warning no-margin">
-										<input id="qncheckbox1" type="checkbox" value="1">
-										<label for="qncheckbox1"></label>
-									</div>
-									<!-- END Note Action !-->
-									<!-- BEGIN Note Preview Text !-->
-									<p class="note-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-									<!-- BEGIN Note Preview Text !-->
-								</div>
-								<!-- BEGIN Note Details !-->
-								<div class="d-flex right justify-content-end">
-									<!-- BEGIN Note Date !--><span class="date">12/12/20</span>
-									<a href="#" class="d-flex align-items-center" data-navigate="view" data-view-port="#note-views" data-view-animation="push"> <i class="pg-icon">chevron_right</i> </a>
-									<!-- END Note Date !-->
-								</div>
-								<!-- END Note Details !-->
-							</li>
-							<!-- END Note Item !-->
-						</ul>
-					</div>
-					<!-- END Note List !-->
-					<div class="view note" id="quick-note">
-						<div>
-							<ul class="toolbar">
-								<li><a href="#" class="close-note-link"><i class="pg-icon">chevron_left</i></a> </li>
-								<li><a href="#" data-action="Bold" class="fs-12"><i class="pg-icon">format_bold</i></a> </li>
-								<li><a href="#" data-action="Italic" class="fs-12"><i class="pg-icon">format_italics</i></a> </li>
-								<li><a href="#" class="fs-12"><i class="pg-icon">link</i></a> </li>
-							</ul>
-							<div class="body">
-								<div>
-									<div class="top"> <span>21st april 2020 2:13am</span> </div>
-									<div class="content">
-										<div class="quick-note-editor full-width full-height js-input" contenteditable="true"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- END Notes !-->
-			<!-- BEGIN Alerts !-->
-			<div class="tab-pane no-padding" id="quickview-alerts">
-				<div class="view-port clearfix" id="alerts">
-					<!-- BEGIN Alerts View !-->
-					<div class="view bg-white">
-						<!-- BEGIN View Header !-->
-						<div class="navbar navbar-default navbar-sm">
-							<div class="navbar-inner">
-								<!-- BEGIN Header Controler !-->
-								<a href="javascript:;" class="action p-l-10 link text-color" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax"> <i class="pg-icon">more_horizontal</i> </a>
-								<!-- END Header Controler !-->
-								<div class="view-heading"> Notications </div>
-								<!-- BEGIN Header Controler !-->
-								<a href="#" class="action p-r-10 pull-right link text-color"> <i class="pg-icon">search</i> </a>
-								<!-- END Header Controler !-->
-							</div>
-						</div>
-						<!-- END View Header !-->
-						<!-- BEGIN Alert List !-->
-						<div data-init-list-view="ioslist" class="list-view boreded no-top-border">
-							<!-- BEGIN List Group !-->
-							<div class="list-view-group-container">
-								<!-- BEGIN List Group Header!-->
-								<div class="list-view-group-header text-uppercase"> Calendar </div>
-								<!-- END List Group Header!-->
-								<ul>
-									<!-- BEGIN List Group Item!-->
-									<li class="alert-list">
-										<!-- BEGIN Alert Item Set Animation using data-view-animation !-->
-										<a href="javascript:;" class="align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
-											<p class=""> <span class="text-warning fs-10"><i class="pg-icon">circle_fill</i></span> </p>
-											<p class="p-l-10 overflow-ellipsis fs-12"> <span class="text-color">David Nester Birthday</span> </p>
-											<p class="p-r-10 ml-auto fs-12 text-right"> <span class="text-warning">Today <br></span> <span class="text-color">All Day</span> </p>
-										</a>
-										<!-- END Alert Item!-->
-										<!-- BEGIN List Group Item!-->
-									</li>
-									<!-- END List Group Item!-->
-								</ul>
-							</div>
-							<!-- END List Group !-->
-							<div class="list-view-group-container">
-								<!-- BEGIN List Group Header!-->
-								<div class="list-view-group-header text-uppercase"> Social </div>
-								<!-- END List Group Header!-->
-								<ul>
-									<!-- BEGIN List Group Item!-->
-									<li class="alert-list">
-										<!-- BEGIN Alert Item Set Animation using data-view-animation !-->
-										<a href="javascript:;" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
-											<p class=""> <span class="text-complete fs-10"><i class="pg-icon">circle_fill</i></span> </p>
-											<p class="col overflow-ellipsis fs-12 p-l-10"> <span class="text-color link">Jame Smith commented on your status<br></span> <span class="text-color">“Perfection Simplified - Company Revox"</span> </p>
-										</a>
-										<!-- END Alert Item!-->
-									</li>
-									<!-- END List Group Item!-->
-								</ul>
-							</div>
-							<div class="list-view-group-container">
-								<!-- BEGIN List Group Header!-->
-								<div class="list-view-group-header text-uppercase"> Sever Status </div>
-								<!-- END List Group Header!-->
-								<ul>
-									<!-- BEGIN List Group Item!-->
-									<li class="alert-list">
-										<!-- BEGIN Alert Item Set Animation using data-view-animation !-->
-										<a href="#" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
-											<p class=""> <span class="text-danger fs-10"><i class="pg-icon">circle_fill</i></span> </p>
-											<p class="col overflow-ellipsis fs-12 p-l-10"> <span class="text-color link">12:13AM GTM, 10230, ID:WR174s<br></span> <span class="text-color">Server Load Exceeted. Take action</span> </p>
-										</a>
-										<!-- END Alert Item!-->
-									</li>
-									<!-- END List Group Item!-->
-								</ul>
-							</div>
-						</div>
-						<!-- END Alert List !-->
-					</div>
-					<!-- EEND Alerts View !-->
-				</div>
-			</div>
-			<!-- END Alerts !-->
-			<div class="tab-pane active no-padding" id="quickview-chat">
-				<div class="view-port clearfix" id="chat">
-					<div class="view bg-white">
-						<!-- BEGIN View Header !-->
-						<div class="navbar navbar-default">
-							<div class="navbar-inner">
-								<!-- BEGIN Header Controler !-->
-								<a href="javascript:;" class="action p-l-10 link text-color" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax"> <i class="pg-icon">add</i> </a>
-								<!-- END Header Controler !-->
-								<div class="view-heading"> Chat List
-									<div class="fs-11">Show All</div>
-								</div>
-								<!-- BEGIN Header Controler !-->
-								<a href="#" class="action p-r-10 pull-right link text-color"> <i class="pg-icon">more_horizontal</i> </a>
-								<!-- END Header Controler !-->
-							</div>
-						</div>
-						<!-- END View Header !-->
-						<div data-init-list-view="ioslist" class="list-view boreded no-top-border">
-							<div class="list-view-group-container">
-								<div class="list-view-group-header text-uppercase"> a</div>
-								<ul>
-									<!-- BEGIN Chat User List Item  !-->
-									<li class="chat-user-list clearfix">
-										<a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#"> <span class="thumbnail-wrapper d32 circular bg-success">
-												<img width="34" height="34" alt="" data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/1x.jpg" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/1.jpg" src="/wp-content/themes/dashboard-child/assets/img/profiles/1x.jpg" class="col-top">
-										</span>
-											<p class="p-l-10 "> <span class="text-color">ava flores</span> <span class="block text-color hint-text fs-12">Hello there</span> </p>
-										</a>
-									</li>
-									<!-- END Chat User List Item  !-->
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- BEGIN Conversation View  !-->
-					<div class="view chat-view bg-white clearfix">
-						<!-- BEGIN Header  !-->
-						<div class="navbar navbar-default">
-							<div class="navbar-inner">
-								<a href="javascript:;" class="link text-color action p-l-10 p-r-10" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax"> <i class="pg-icon">chevron_left</i> </a>
-								<div class="view-heading"> John Smith
-									<div class="fs-11 hint-text">Online</div>
-								</div>
-								<a href="#" class="link text-color action p-r-10 pull-right "> <i class="pg-icon">more_horizontal</i> </a>
-							</div>
-						</div>
-						<!-- END Header  !-->
-						<!-- BEGIN Conversation  !-->
-						<div class="chat-inner" id="my-conversation">
-							<!-- BEGIN From Me Message  !-->
-							<div class="message clearfix">
-								<div class="chat-bubble from-me"> Hello there </div>
-							</div>
-							<!-- END From Me Message  !-->
-							<!-- BEGIN From Them Message  !-->
-							<div class="message clearfix">
-								<div class="profile-img-wrapper m-t-5 inline"> <img class="col-top" width="30" height="30" src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small.jpg" alt="" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small.jpg" data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small2x.jpg"> </div>
-								<div class="chat-bubble from-them"> Hey </div>
-							</div>
-							<!-- END From Them Message  !-->
-							<!-- BEGIN From Me Message  !-->
-							<div class="message clearfix">
-								<div class="chat-bubble from-me"> Did you check out Pages framework ? </div>
-							</div>
-							<!-- END From Me Message  !-->
-							<!-- BEGIN From Me Message  !-->
-							<div class="message clearfix">
-								<div class="chat-bubble from-me"> Its an awesome chat </div>
-							</div>
-							<!-- END From Me Message  !-->
-							<!-- BEGIN From Them Message  !-->
-							<div class="message clearfix">
-								<div class="profile-img-wrapper m-t-5 inline"> <img class="col-top" width="30" height="30" src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small.jpg" alt="" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small.jpg" data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/avatar_small2x.jpg"> </div>
-								<div class="chat-bubble from-them"> Yea </div>
-							</div>
-							<!-- END From Them Message  !-->
-						</div>
-						<!-- BEGIN Conversation  !-->
-						<!-- BEGIN Chat Input  !-->
-						<div class="b-t b-grey bg-white clearfix p-l-10 p-r-10">
-							<div class="row">
-								<div class="col-1 p-t-15"> <a href="#" class="link text-color"><i class="pg-icon">add</i></a> </div>
-								<div class="col-8 no-padding">
-									<label class="d-none">Reply</label>
-									<input type="text" class="form-control chat-input" data-chat-input="" data-chat-conversation="#my-conversation" placeholder="Say something"> </div>
-								<div class="col-2 link text-color m-l-10 m-t-15 p-l-10 b-l b-grey col-top"> <a href="#" class="link text-color"><i class="pg-icon">camera</i></a> </div>
-							</div>
-						</div>
-						<!-- END Chat Input  !-->
-					</div>
-					<!-- END Conversation View  !-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- END QUICKVIEW-->
-	<!-- START OVERLAY -->
-	<div class="overlay hide" data-pages="search">
-		<!-- BEGIN Overlay Content !-->
-		<div class="overlay-content has-results m-t-20">
-			<!-- BEGIN Overlay Header !-->
-			<div class="container-fluid">
-				<!-- BEGIN Overlay Logo !--><img class="overlay-brand" src="/wp-content/themes/dashboard-child/assets/img/logo.png" alt="logo" data-src="/wp-content/themes/dashboard-child/assets/img/logo.png" data-src-retina="/wp-content/themes/dashboard-child/assets/img/logo_2x.png" width="78" height="22">
-				<!-- END Overlay Logo !-->
-				<!-- BEGIN Overlay Close !-->
-				<a href="#" class="close-icon-light btn-link btn-rounded  overlay-close text-black"> <i class="pg-icon">close</i> </a>
-				<!-- END Overlay Close !-->
-			</div>
-			<!-- END Overlay Header !-->
-			<div class="container-fluid">
-				<!-- BEGIN Overlay Controls !-->
-				<input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false">
-				<br>
-				<div class="d-flex align-items-center">
-					<div class="form-check form-check-inline right m-b-0">
-						<input id="checkboxn" type="checkbox" value="1">
-						<label for="checkboxn">Search within page</label>
-					</div>
-					<p class="fs-13 hint-text m-l-10 m-b-0">Press enter to search</p>
-				</div>
-				<!-- END Overlay Controls !-->
-			</div>
-			<!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
-			<div class="container-fluid p-t-20"> <span class="hint-text">
-						suggestions :
-				</span> <span class="overlay-suggestions"></span>
-				<br>
-				<div class="search-results m-t-30">
-					<p class="bold">Pages Search Results: <span class="overlay-suggestions"></span></p>
-					<div class="row">
-						<div class="col-md-6">
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular bg-success text-white "> <img width="36" height="36" src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar.jpg" data-src="/wp-content/themes/dashboard-child/assets/img/profiles/avatar.jpg" data-src-retina="/wp-content/themes/dashboard-child/assets/img/profiles/avatar2x.jpg" alt=""> </div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin "><span class="semi-bold result-name">ice cream</span> on pages</h5>
-									<p class="small-text hint-text">via john smith</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular bg-success text-white ">
-									<div>T</div>
-								</div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin "><span class="semi-bold result-name">ice cream</span> related topics</h5>
-									<p class="small-text hint-text">via pages</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular bg-success text-white ">
-									<div>M </div>
-								</div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin "><span class="semi-bold result-name">ice cream</span> music</h5>
-									<p class="small-text hint-text">via pagesmix</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-						</div>
-						<div class="col-md-6">
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular bg-info text-white d-flex align-items-center"> <i class="pg-icon">facebook</i> </div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin "><span class="semi-bold result-name">ice cream</span> on facebook</h5>
-									<p class="small-text hint-text">via facebook</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular bg-complete text-white d-flex align-items-center"> <i class="pg-icon">twitter</i> </div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin ">Tweats on<span class="semi-bold result-name"> ice cream</span></h5>
-									<p class="small-text hint-text">via twitter</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-							<!-- BEGIN Search Result Item !-->
-							<div class="d-flex m-t-15">
-								<!-- BEGIN Search Result Item Thumbnail !-->
-								<div class="thumbnail-wrapper d48 circular text-white bg-danger d-flex align-items-center"> <i class="pg-icon">google_plus</i> </div>
-								<!-- END Search Result Item Thumbnail !-->
-								<div class="p-l-10">
-									<h5 class="no-margin ">Circles on<span class="semi-bold result-name"> ice cream</span></h5>
-									<p class="small-text hint-text">via google plus</p>
-								</div>
-							</div>
-							<!-- END Search Result Item !-->
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- END Overlay Search Results !-->
-		</div>
-		<!-- END Overlay Content !-->
-	</div>
-	<!-- END OVERLAY -->
-
 	
-	<!-- BEGIN VENDOR JS -->
-	<!-- BEGIN VENDOR JS -->
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/modernizr.custom.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/popper/umd/popper.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery-actual/jquery.actual.min.js"></script>
-	<script src="/wp-content/themes/dashboard-child/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-	<!-- END VENDOR JS -->
-	<!-- BEGIN CORE TEMPLATE JS -->
-	<script src="/wp-content/themes/dashboard-child/pages/js/pages.min.js" type="text/javascript"></script>
-	<!-- END CORE TEMPLATE JS -->
-	<!-- BEGIN PAGE LEVEL JS -->
-	<script src="/wp-content/themes/dashboard-child/assets/js/scripts.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		
-		function myFunction() {
-  		// Declare variables
-  			var input, filter, table, tr, td, i, txtValue;
-  			input = document.getElementById("myInput");
-  			filter = input.value.toUpperCase();
- 			table = document.getElementById("myTable");
-  			tr = table.getElementsByTagName("tr");
-
-  			// Loop through all table rows, and hide those who don't match the search query
-  			for (i = 0; i < tr.length; i++) {
-    			td = tr[i].getElementsByTagName("td")[0];
-    			if (td) {
-      				txtValue = td.textContent || td.innerText;
-      				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        				tr[i].style.display = "";
-     				} 
-     				else {
-        				tr[i].style.display = "none";
-     				}
-    			}
-  			}
-		}
-		
-		function displayCompanies(){ 
-			var checkbox = document.getElementById("companycheckbox"); 
-			var container  = document.getElementById("companiescontainer");
-			//select dropdown variable needed
-			if(checkbox.checked = true) {
-				//set the display of the attributes in the div to none and set the display of the select to visible
-				
-			}
-			else { 
-				//do the opposite
-			}
-
-		}
-
-		// start operations on companies widget 
-		jQuery(document).ready(function(){
-  		jQuery(".companiesButton").click(function(){
-    		jQuery("#myModal").css("display", "block");
-    		
-  		});
-  		jQuery("#close").click(function(){
-    		jQuery("#myModal").css("display", "none");
-    		
-  		});
-
-			});
-		// when the user clicks outside of the modal then close it
-		/*
-		window.onclick = function(event) {
-  		if (event.target == modal) {
-    	modal.style.display = "none";
-  		}
-		*/
-
-	</script>
-
-
-
+	
+<?php wp_footer(); ?>
 	<!-- END PAGE LEVEL JS -->
 </body>
 

@@ -2032,7 +2032,7 @@ body.sidebar-visible .page-sidebar .sidebar-header .sidebar-header-controls {
 }
 
 .page-sidebar .sidebar-menu .menu-items > li ul.sub-menu {
-  display: none;
+ 
   list-style: none;
   clear: both;
   margin: 0 0 10px 0;
