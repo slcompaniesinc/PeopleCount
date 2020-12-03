@@ -245,8 +245,8 @@
         inactiveButton: ['inactive', 'Inactive Applicants', 'Date Inactive'],
         placedButton: ['placed', 'Placed Associates', 'Date Placed'],
         activeButton: ['active', 'Active Associates', 'Date Active'],
-        terminatedButton: ['terminated', 'Terminated Associates', 'Date Terminated']
-
+        terminatedButton: ['terminated', 'Terminated Associates', 'Date Terminated'],
+        dnrButton: ['dnr', 'DNR Associates', 'Date Added']
       };
 
 			var correctInfo = table_info[element.id];

@@ -421,10 +421,10 @@ $result = $mysqli->query($checkuserSql);
 									<div class="widget-9 card  bg-success no-margin widget-loader-bar">
 										<div class="full-height d-flex flex-column">
 											<div class="card-header ">
-												<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Job Orders </span> </div>
+												<div class="card-title"> <span class="font-montserrat fs-11 all-caps">Do Not Return </span> </div>
 												<div class="card-controls">
 													<ul>
-														<li> <button id="jobOrderButton" class="companiesButton button-height" >View</button></li>
+														<li> <button id="dnrButton" class="companiesButton button-height" >View</button></li>
 													</ul>
 												</div>
 											</div>
@@ -596,7 +596,7 @@ $result = $mysqli->query($checkuserSql);
 						<!-- Start Widget -->
 						<div class="col-lg-6 hidden-lg  col-xlg-4 m-b-10" >
 
-							<div class="widget-15 card no-margin  widget-loader-circle" style="height: 400px; overflow-y: auto;">
+							<div class="widget-15 card no-margin  widget-loader-circle" style="height: 100%; overflow-y: auto;">
 								
 								<div class="card-header top-right ">
 									<div class="card-controls">

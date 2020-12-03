@@ -18,6 +18,8 @@
         return "wp4s_placed_associates";
       case 5:
         return "wp4s_terminated_associates";
+      case 6:
+        return "wp4s_dnr_associates";
     }
   }
 
@@ -41,6 +43,8 @@
         return "Placed";
       case 5:
         return "Terminated";
+      case 6:
+        return "DNR";
     }
   }
 

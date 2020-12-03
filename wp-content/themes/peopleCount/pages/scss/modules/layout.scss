@@ -65,7 +65,7 @@ body {
     .content {
       /* Content holder */
       z-index: 10;
-      padding-top: $layout-header-height;
+     
       padding-bottom: 69px;
       min-height: 100%;
       @include transition(all 0.3s ease);

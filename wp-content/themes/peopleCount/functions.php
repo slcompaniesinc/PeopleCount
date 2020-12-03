@@ -35,6 +35,21 @@ function load_ppcdashboard_styles(){
 	// add condition for the workflow board
 }
 
+// adding custom roles
+add_role(
+	'recruiter',
+	__('Recruiter'),
+	array(
+		'create_users' => false,
+		'edit_users' => false
+	)
+);
+
+//blocking non-admin from the wordpresss dashboard
+add_action( 'init', 'blockusers_init' ); function blockusers_init() { if ( is_admin() && ! current_user_can( 'administrator' ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) { wp_redirect( home_url() ); exit; } } 
+
+//registering the navigation menu
+
 add_action( 'init', 'register_navigation');
 function register_navigation(){
 	register_nav_menu('site-menu', __('Site Menu'));

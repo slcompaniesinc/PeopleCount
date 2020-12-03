@@ -88,7 +88,7 @@ function drop(ev, flag) {
 	</script>
 </head>
 <body>
-	
+
 	
 		<div>
 			<div id="div1" ondrop="drop(event,1)" ondragover="allowDrop(event)" class="column">
@@ -123,6 +123,9 @@ function drop(ev, flag) {
 			</div>
 			<div id="div6" ondrop="drop(event,6)" ondragover="allowDrop(event)" class="column">
 				<h2>Do Not Return</h2>
+				<?
+				getApplicants("wp4s_dnr_associates");
+				?>
 			</div>
 		</div>
 <? wp_footer();?>
