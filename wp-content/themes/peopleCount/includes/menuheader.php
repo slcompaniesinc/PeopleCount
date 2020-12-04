@@ -1,66 +1,13 @@
-<?/* Template Name: Calendar Template */ 
-wp_head();
-?>
+<? include_once $_SERVER['DOCUMENT_ROOT']. '/wp-load.php'; ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
-		html, body{
-			min-height: 100%;
-		}
-		body{
-
-			justify-content: center;
-		}
-		
-		.header-grid{
-			list-style: none;
-		}
-		.table-container{
-			display:flex;
-			flex-direction: row;
-		}
-		.table-container > div{
-			width: 100px;
-		}
-	</style>
 	<title></title>
 </head>
-<body class="fixed-header menu-pin menu-behind customize-support">
-<nav class="page-sidebar" data-pages="sidebar">
-		<!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-		<div class="sidebar-overlay-slide from-top" id="appMenu"> </div>
-		<!-- END SIDEBAR MENU TOP TRAY CONTENT-->
-		<!-- BEGIN SIDEBAR MENU HEADER-->
-		<div class="sidebar-header"> <img src="<?php echo get_template_directory_uri().'/assets/img/logo_white.png'?>" alt="logo" class="brand" data-src="<?php echo get_template_directory_uri().'/assets/img/logo_white.png'?>" data-src-retina="https://final.peoplecount.work/public_html/wp-content/themes/peopleCount/img/logo_white_2x.png" width="78" height="22">
-			<div class="sidebar-header-controls">
-				<button aria-label="Toggle Drawer" type="button" class="btn btn-icon-link invert sidebar-slide-toggle m-l-20 m-r-10" data-pages-toggle="#appMenu"> <i class="pg-icon">chevron_down</i> </button>
-				<button aria-label="Pin Menu" type="button" class="btn btn-icon-link invert d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar"> <i class="pg-icon"></i> </button>
-			</div>
-		</div>
-		<!-- END SIDEBAR MENU HEADER-->
-		<!-- START SIDEBAR MENU -->
-		<div class="sidebar-menu">
-			<!-- BEGIN SIDEBAR MENU ITEMS-->
-			<? 
-
-			wp_nav_menu(
-				array(
-					'theme_location' => 'site-menu',
-					'menu_class' => 'menu-items'
-				)
-			);
-
-			?>
-			<div class="clearfix"></div>
-		</div>
-		<!-- END SIDEBAR MENU -->
-	</nav>
-	<!-- END SIDEBAR -->
-
+<body>
 	<!-- START HEADER -->
-		<div class="header ">
+		<header class="header ">
 			<!-- START MOBILE SIDEBAR TOGGLE --><a href="#" class="btn-link toggle-sidebar d-lg-none pg-icon btn-icon-link" data-toggle="sidebar">
 				menu</a>
 			<!-- END MOBILE SIDEBAR TOGGLE -->
@@ -175,68 +122,7 @@ wp_head();
 				<!-- END User Info-->
 				<a href="#" class="header-icon m-l-5 sm-no-margin d-inline-block" data-toggle="quickview" data-toggle-element="#quickview"> <i class="pg-icon btn-icon-link">menu_add</i> </a>
 			</div>
-		</div>
+		</header>
 		<!-- END HEADER -->
-		<!-- END PAGE HEADER WRAPPER -->
-		<!-- START PAGE CONTENT WRAPPER -->
-		<div class="page-content-wrapper">
-			<!-- START PAGE CONTENT -->
-			<div class="content">
-				<!-- START JUMBOTRON -->
-				<div style="padding: 2rem 1rem;">
-					<?php
-
-						echo "Welcome, ".$current_user->display_name. "!";
-					?>
-				</div>
-
-				<div class="table-container">
-					<div class="row">
-						1
-					</div>
-					<div class="row">
-						2
-					</div>
-					<div class="row">
-						3
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-
-
-<script type="text/javascript">
-	
-	function getDOW( day, month, year){
-		//if true a 1 if not then 0
-		var isleapYear = (year % 4)== 0 ? true : false;
-		var leapFlag = isleapYear && month < 3 ? 1:0;
-
-		// gets the last two digits of the year
-		var twoDigYear = year % 100;
-		yearCode = (twoDigYear + (twoDigYear/4) ) % 7;
-		var monthsArr = [0,3,3,6,1,4,6,2,5,0,3,5];
-		// centry codes from 1700s to 2000s
-		var centuryObj ={
-			1700:4,
-			1800:2,
-			1900:0,
-			2000:6,
-			2100:4,
-			2200:2,
-			2300:0
-		};
-
-		var dayofwk = (yearCode + monthsArr[month-1] + centuryObj[year-twoDigYear]  
-		+ day - leapFlag ) % 7;
-
-		return dayofwk;
-	}
-	// get the 
-
-</script>
 </body>
 </html>

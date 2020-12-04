@@ -1,0 +1,8 @@
+[03-Dec-2020 20:19:09 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_template_directory_uri() in /home2/finalpeoplecount/public_html/wp-content/themes/peopleCount/includes/navigation.php:20
+Stack trace:
+#0 {main}
+  thrown in /home2/finalpeoplecount/public_html/wp-content/themes/peopleCount/includes/navigation.php on line 20
+[03-Dec-2020 20:22:54 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function wp_nav_menu() in /home2/finalpeoplecount/public_html/wp-content/themes/peopleCount/includes/navigation.php:26
+Stack trace:
+#0 {main}
+  thrown in /home2/finalpeoplecount/public_html/wp-content/themes/peopleCount/includes/navigation.php on line 26

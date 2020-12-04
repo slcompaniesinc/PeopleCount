@@ -1,0 +1,67 @@
+
+header { 
+	height: 15vh;
+	background-color: white;
+	border:1px solid grey;
+
+ }
+ body{
+ 	display: flex;
+ 	min-height: 100vh;
+ 	flex-direction: column;
+ 	margin: 0;
+ }
+ #main{
+ 	display: flex;
+ 	flex:1;
+ 	flex-direction: column;
+ }
+ #main > nav {
+  order: -1;
+}
+ #main > article {
+ 	flex:1;
+ }
+ @media screen and (min-width: 576px) {
+  #main {
+    flex-direction: row;
+  }
+  #main > nav, 
+  #main > aside {
+    flex: 0 0 20vw;
+  }  
+}
+ header, footer, article, nav, aside {
+  padding: 1em;
+}
+#ppc-sidebar{
+	background: #1d1919;
+}
+.menu-items{
+
+	list-style: none;
+    padding-left: 0px;
+    margin-top: 50px;
+}
+.menu-items > li{
+	margin-bottom: 10px;
+}
+.menu-items > li > a, .sub-menu > li > a{
+	color:white;
+}
+.sub-menu {
+	list-style: none;
+}
+.menu-site-menu-container{
+	height: 100vh;
+
+}
+#page-sidebar{
+	order: -1;
+}
+.page-content-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}

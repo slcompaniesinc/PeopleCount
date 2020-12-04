@@ -25,13 +25,17 @@ add_action( 'wp_enqueue_scripts', 'load_ppcdashboard_styles' );
  */
 function load_ppcdashboard_styles(){
 	// finds the page with the slug 'dashboard'
-	if( is_page( 'ppcdashboard' ) ){
+	if( is_page( 'dashboard_test' ) ){
 		wp_enqueue_script( 'ppcdashboardjs', get_template_directory_uri().'/js/ppcdashboard.js', array(), false, true);
 		wp_enqueue_style( 'peoplecountdashboard',get_template_directory_uri().'/css/dashboard.css' );
 		
 		//wp_enqueue_script( '' , get_template_directory_uri().'' );
 		
 	}
+	if( is_page( 'ppcdashboard' ) ){
+		wp_enqueue_style( 'newpeoplecountdashboard',get_template_directory_uri().'/css/new_dashboard.css' );
+	}
+
 	// add condition for the workflow board
 }
 
@@ -54,5 +58,8 @@ add_action( 'init', 'register_navigation');
 function register_navigation(){
 	register_nav_menu('site-menu', __('Site Menu'));
 }
+
+add_filter('show_admin_bar', '__return_false');
+
 
 ?>
